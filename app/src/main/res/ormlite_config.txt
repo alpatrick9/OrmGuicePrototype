@@ -1,0 +1,17 @@
+# --table-start--
+dataClass=com.example.patmi.guiceorm.models.SampleEntity
+tableName=SampleEntity
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=label
+# --field-end--
+# --field-start--
+fieldName=date
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
