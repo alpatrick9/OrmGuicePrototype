@@ -47,7 +47,6 @@ public class MainActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         input.setSelected(false);
         try {
-            OpenHelperManager.getHelper(this, SqliteHelper.class);
             samples = sampleDao.findAll();
             SampleAdapter adapter = new SampleAdapter(this, samples, sampleDao);
             listView.setAdapter(adapter);
