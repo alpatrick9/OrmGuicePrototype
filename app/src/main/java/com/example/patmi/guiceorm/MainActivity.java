@@ -15,10 +15,12 @@ import com.example.patmi.guiceorm.models.SampleEntity;
 import com.google.inject.Inject;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.misc.TransactionManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -48,6 +50,19 @@ public class MainActivity extends RoboActivity {
         input.setSelected(false);
         try {
             samples = sampleDao.findAll();
+            /* insertion avec optisation
+            SqliteHelper sqliteHelper = OpenHelperManager.getHelper(this, SqliteHelper.class);
+            if(samples.size() == 0) {
+                TransactionManager.callInTransaction(sqliteHelper.getConnectionSource(), new Callable<Void>() {
+                    public Void call() throws Exception {
+                        for(int i=0;i<35000;i++) {
+                            sampleDao.create(new SampleEntity("test " + i));
+                        }
+                        samples = sampleDao.findAll();
+                        return null;
+                    }
+                });
+            }*/
             SampleAdapter adapter = new SampleAdapter(this, samples, sampleDao);
             listView.setAdapter(adapter);
 
